@@ -23,14 +23,12 @@ static inline size_t get_maximum_bank_joltage(const char* const bank) {
 
     for (const char* it = bank+1; it < END; it++) {
         if (*it > *(top-1)) {
-            do {
-                const size_t stack_size     = top - stack;
-                const size_t remaining_data = END - it;
-                if (stack_size + remaining_data <= STACK_CAP) {
+            while (top - stack + END - it > STACK_CAP && top > stack) {
+                top--;
+                if (*it <= *(top - 1)) {
                     break;
                 }
-                --top;
-            } while (*it > *(top-1) && top > stack);
+            }
         }
         if (top < STACK_END) 
             *top++ = *it;
