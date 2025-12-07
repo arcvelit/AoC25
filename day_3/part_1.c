@@ -4,7 +4,6 @@
 #define BANK_SIZE 100
 #define CONCAT_CHARS(c1,c2) (((c1) - '0') * 10 + ((c2) - '0'))
 
-// Iterative approach
 static inline size_t get_maximum_bank_joltage(const char* const bank) {
     const char* const END = &bank[BANK_SIZE];
 
@@ -26,7 +25,6 @@ static inline size_t get_maximum_bank_joltage(const char* const bank) {
     return CONCAT_CHARS(max, max2);
 }
 
-// Entry point
 int main(void) {
     FILE *file = fopen("input.txt", "r");
     if (!file) {
