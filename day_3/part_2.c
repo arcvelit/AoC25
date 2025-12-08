@@ -13,18 +13,18 @@ static inline size_t scan_int(const char* str, size_t size) {
     return result;
 }
 
-static inline size_t get_maximum_bank_joltage(const char* const bank) {
+static inline size_t get_maximum_bank_joltage(const char* bank) {
     char  stack[STACK_CAP] = { *bank };
     char* top = &stack[1];
 
     const char* const STACK_END = &stack[STACK_CAP];
     const char* const END = &bank[BANK_SIZE];
 
-    for (const char* it = bank+1; it < END; it++) {
-        while (*it > *(top - 1) && top - stack + END - it > STACK_CAP && top > stack)
+    for (bank = bank+1; bank < END; bank++) {
+        while (*bank > *(top - 1) && top - stack + END - bank > STACK_CAP && top > stack)
             top--;
         if (top < STACK_END)
-            *top++ = *it;
+            *top++ = *bank;
     }
     return scan_int(stack, STACK_CAP);
 }
