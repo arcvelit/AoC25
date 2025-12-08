@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define BANK_SIZE 100
 #define STACK_CAP 12
+
+static inline const char* max(const char* const a, const char* const b) { return a > b ? a : b; }
 
 static inline size_t scan_int(const char* str, size_t size) {
     size_t result = 0;
@@ -21,7 +24,8 @@ static inline size_t get_maximum_bank_joltage(const char* bank) {
     const char* const END = &bank[BANK_SIZE];
 
     for (bank = bank+1; bank < END; bank++) {
-        while (*bank > *(top - 1) && top - stack + END - bank > STACK_CAP && top > stack)
+        const char* const lowest = max(stack, stack - END + STACK_CAP + bank);
+        while (*bank > *(top - 1) && top > lowest)
             top--;
         if (top < STACK_END)
             *top++ = *bank;
