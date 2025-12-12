@@ -5,8 +5,7 @@
 static inline size_t consume_id(char** str) {
     size_t result = 0;
     while (isdigit(**str)) {
-        result *= 10;
-        result += **str - '0';
+        result = result * 10 + (**str - '0');
         (*str)++;
     }
     return result;

@@ -10,9 +10,7 @@ int dial = 50;
 static inline int scan_int_endl(const char* str) {
     int result = 0;
     while (str && isdigit(*str)) {
-        result *= 10;
-        result += *str - '0';
-        str++;
+        result = result * 10 + (*str++ - '0');
     }
     return result;
 }

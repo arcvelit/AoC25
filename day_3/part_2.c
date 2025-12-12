@@ -10,8 +10,7 @@ static inline const char* max(const char* const a, const char* const b) { return
 static inline size_t scan_int(const char* str, size_t size) {
     size_t result = 0;
     while (size--) {
-        result *= 10;
-        result += *str++ - '0';
+        result = result * 10 + (*str++ - '0');
     }
     return result;
 }
